@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Principal -->
+    <title>DETAILWAVE | Nettoyage Canapé, Tapis, Matelas & Auto à Domicile - Liège</title>
+    <meta name="description" content="Spécialiste du nettoyage textile à Liège (Canapés, Matelas, Tapis) et lavage auto à domicile. Élimination taches & odeurs. Devis gratuit, intervention rapide sur toute la province de Liège." />
+    <meta name="keywords" content="nettoyage canapé liège, nettoyage matelas, lavage auto domicile, nettoyage tapis, désinfection textile, detailwave, nettoyage vapeur liège" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="DETAILWAVE Liège" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://detailwave.be/" />
+    <meta property="og:title" content="DETAILWAVE | Redonnez vie à vos textiles et véhicules" />
+    <meta property="og:description" content="Service professionnel à domicile à Liège. Injection-extraction pour canapés, matelas et tapis. Lavage auto complet." />
+    <meta property="og:image" content="/Photo/Hero.jpg" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Styles & Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap');
+      
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* Offset for fixed navbar */
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #F8FAFC; /* Slate 50 - Clean white/blue tint */
+        color: #0F172A; /* Slate 900 */
+      }
+      
+      h1, h2, h3, h4, .font-serif {
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      @keyframes fade-in-up {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .animate-fade-in-up {
+        animation: fade-in-up 1s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+      }
+      
+      .animate-delay-200 { animation-delay: 0.2s; }
+      .animate-delay-400 { animation-delay: 0.4s; }
+    </style>
+
+    <!-- Structured Data (JSON-LD) for Local Business SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "DETAILWAVE",
+      "image": "/Photo/Hero.jpg",
+      "telephone": "+32 497 36 33 23",
+      "url": "https://detailwave.be",
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Liège",
+        "addressCountry": "BE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.6326,
+        "longitude": 5.5797
+      },
+      "areaServed": [
+        "Liège",
+        "Ans",
+        "Seraing",
+        "Herstal",
+        "Chaudfontaine",
+        "Saint-Nicolas"
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      "sameAs": []
+    }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

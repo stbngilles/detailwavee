@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --navy: #001A72;
+  --blue: #2563EB;
+  --white: #FFFFFF;
+  --slate-50: #F8FAFC;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-['Outfit'] text-slate-700 bg-white overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#001A72] text-white px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#2563EB] transition-all shadow-md active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-[#001A72] text-[#001A72] px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#001A72] hover:text-white transition-all active:scale-95;
+  }
+}
+
+/* Mobile specific font scaling */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+  }
+
+  h2 {
+    font-size: 1.85rem !important;
+    line-height: 1.2 !important;
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+/* BUBBLE ANIMATION */
+.animate-bubble {
+  animation: bubble 15s linear infinite;
+  opacity: 0;
+}
+
+@keyframes bubble {
+  0% {
+    transform: translateY(100%) scale(0.5);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: translateY(0%) scale(1.2);
+    opacity: 0.2;
+  }
+
+  90% {
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: translateY(-100%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.bg-hero-pattern {
+  background-image: radial-gradient(#2563EB 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
