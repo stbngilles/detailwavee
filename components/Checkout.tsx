@@ -1,7 +1,7 @@
 
 import React, { useMemo, useState } from 'react';
 import { CartItem } from '../types';
-import emailjs from '@emailjs/browser';
+
 
 interface CheckoutProps {
   items: CartItem[];
@@ -26,9 +26,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
   const [success, setSuccess] = useState(false);
   const [photos, setPhotos] = useState<{ file: File; preview: string }[]>([]);
 
-  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 
   const subtotal = items.reduce((sum, item) => {
     return sum + (item.selectedOption ? item.selectedOption.price : item.price);
@@ -98,45 +96,33 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
       return;
     }
 
-    if (!serviceId || !templateId || !publicKey) {
-      setError('Configuration e-mail manquante. Veuillez contacter l\'administrateur.');
-      return;
-    }
+
+    // Validation removed for EmailJS keys
 
     setSending(true);
 
     try {
-      // Process photos to base64 for EmailJS attachments if needed
-      // Note: EmailJS has limitations on attachment size. 
-      // We'll prepare them as links or base64 depending on your template setup.
       const photoData = await Promise.all(photos.map(p => fileToBase64(p.file)));
 
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: `${form.firstName} ${form.lastName}`,
-          firstName: form.firstName,
-          lastName: form.lastName,
-          phone: form.phone,
-          email: form.email,
-          address: form.address,
-          postalCode: form.postalCode,
-          city: form.city,
-          note: form.note,
-          preferredDate: form.preferredDate,
-          preferredTime: form.preferredTime,
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...form,
           cartSummary,
           total: `${subtotal}€`,
           itemsCount: items.length,
-          reply_to: form.email,
-          photos_count: photos.length,
-          // You can use these in your EmailJS template if configured for multiple attachments
-          // or simple text indicators that photos were sent.
-          has_photos: photos.length > 0 ? "Oui" : "Non"
-        },
-        { publicKey }
-      );
+          items, // Pass the full items array for better email templating
+          photos: photoData
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send email');
+      }
 
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -345,7 +331,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                           }}
                         >
                           <option value="">Heure</option>
-                          {Array.from({ length: 13 }, (_, i) => i + 8).map(h => (
+                          {Array.from({ length: 15 }, (_, i) => i + 8).map(h => (
                             <option key={h} value={h.toString().padStart(2, '0')}>{h}h</option>
                           ))}
                         </select>
