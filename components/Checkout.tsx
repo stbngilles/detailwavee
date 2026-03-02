@@ -37,8 +37,8 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
     return items
       .map((item, idx) => {
         const optionLabel = item.selectedOption ? ` - ${item.selectedOption.label}` : '';
-        const price = item.selectedOption ? item.selectedOption.price : item.price;
-        return `${idx + 1}. ${item.name}${optionLabel} : ${price}€`;
+        const priceStr = item.selectedOption ? (item.selectedOption.priceLabel || `${item.selectedOption.price}€`) : (item.priceLabel || `${item.price}€`);
+        return `${idx + 1}. ${item.name}${optionLabel} : ${priceStr}`;
       })
       .join('\n');
   }, [items]);
@@ -458,7 +458,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                         </div>
                         <div className="text-right">
                           <span className="text-sm font-bold text-slate-900">
-                            {item.selectedOption ? item.selectedOption.price : item.price}€
+                            {item.selectedOption ? (item.selectedOption.priceLabel || `${item.selectedOption.price}€`) : (item.priceLabel || `${item.price}€`)}
                           </span>
                         </div>
                       </div>

@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { Product, PricingOption } from '../types';
 
 interface ProductDetailProps {
@@ -39,22 +39,35 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
 
           {/* Left: Images */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="w-full aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-50 border border-slate-100">
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                className="w-full h-full object-cover"
+            <div className="w-full aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-50 border border-slate-100 group relative">
+              <ReactCompareSlider
+                className="w-full h-full"
+                item1={
+                  <ReactCompareSliderImage
+                    src={product.gallery && product.gallery.length > 1 ? product.gallery[1] : '/Photo/Tache.png'}
+                    alt="Avant"
+                    className="object-cover"
+                  />
+                }
+                item2={
+                  <ReactCompareSliderImage
+                    src={product.imageUrl}
+                    alt="Après"
+                    className="object-cover"
+                  />
+                }
               />
-            </div>
-            {product.gallery && product.gallery.length > 1 && (
-              <div className="grid grid-cols-2 gap-6">
-                {product.gallery.slice(1).map((img, idx) => (
-                  <div key={idx} className="rounded-3xl overflow-hidden aspect-video bg-slate-50 border border-slate-100">
-                    <img src={img} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-                  </div>
-                ))}
+              <div className="absolute top-6 left-6 pointer-events-none">
+                <span className="px-4 py-2 bg-slate-900/80 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-widest text-white border border-white/20 shadow-lg">
+                  Avant
+                </span>
               </div>
-            )}
+              <div className="absolute top-6 right-6 pointer-events-none">
+                <span className="px-4 py-2 bg-blue-600/90 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-widest text-white border border-white/20 shadow-lg">
+                  Après
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Right: Details */}
@@ -83,8 +96,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
                       key={idx}
                       onClick={() => setSelectedOption(item)}
                       className={`flex justify-between items-center p-5 rounded-2xl cursor-pointer transition-all border-2 ${selectedOption === item
-                          ? 'border-blue-600 bg-white shadow-lg'
-                          : 'border-transparent bg-white/50 hover:bg-white hover:border-slate-200'
+                        ? 'border-blue-600 bg-white shadow-lg'
+                        : 'border-transparent bg-white/50 hover:bg-white hover:border-slate-200'
                         }`}
                     >
                       <div className="flex items-center gap-4">
@@ -95,14 +108,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
                           {item.label}
                         </span>
                       </div>
-                      <span className={`font-bold text-lg ${selectedOption === item ? 'text-blue-600' : 'text-slate-900'}`}>{item.price}€</span>
+                      <span className={`font-bold text-lg ${selectedOption === item ? 'text-blue-600' : 'text-slate-900'}`}>{item.priceLabel || `${item.price}€`}</span>
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="flex justify-between items-center p-6 bg-white rounded-2xl border border-slate-100">
                   <span className="text-slate-500 font-bold text-sm uppercase tracking-widest">Tarif fixe</span>
-                  <span className="text-2xl font-bold text-slate-900">{product.price}€</span>
+                  <span className="text-2xl font-bold text-slate-900">{product.priceLabel || `${product.price}€`}</span>
                 </div>
               )}
             </div>
@@ -112,7 +125,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Prix total</span>
                   <p className="text-4xl font-bold text-slate-900">
-                    {selectedOption ? selectedOption.price : product.price}€
+                    {selectedOption ? (selectedOption.priceLabel || `${selectedOption.price}€`) : (product.priceLabel || `${product.price}€`)}
                   </p>
                 </div>
                 <div className="text-right">

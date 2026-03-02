@@ -13,19 +13,16 @@ export const PRODUCTS: Product[] = [
         tagline: 'Redonnez vie à votre salon.',
         description: 'Élimination des taches tenaces, neutralisation des odeurs et désinfection complète par injection-extraction.',
         longDescription: 'Notre service de nettoyage de canapé à domicile utilise des techniques professionnelles pour traiter la microfibre, le velours, le coton et le lin. Nous éliminons les taches de café, de graisse, d\'urine et neutralisons les mauvaises odeurs. Le résultat est visible immédiatement et le séchage est rapide.',
-        price: 40,
+        price: 90,
         priceList: [
-            { label: 'Fauteuil', price: 40 },
-            { label: 'Canapé 2/3 places', price: 60 },
-            { label: 'Canapé 4/5 places', price: 70 },
-            { label: 'Canapé en U', price: 80 },
-            { label: 'Pouf', price: 19 },
-            { label: 'Lot de chaises (4-6)', price: 50 }
+            { label: '3 places', price: 90 },
+            { label: '4 places', price: 120 },
+            { label: '5 places et +', price: 145 }
         ],
         category: 'Textile',
-        imageUrl: '/Photo/Canap%C3%A9.jpg',
+        imageUrl: '/Photo/sofa.png',
         gallery: [
-            '/Photo/Canap%C3%A9.jpg',
+            '/Photo/sofa.png',
             '/Photo/Tache.png'
         ],
         features: ['Détachage profond', 'Désinfection', 'Anti-odeurs', 'Séchage rapide']
@@ -36,45 +33,45 @@ export const PRODUCTS: Product[] = [
         tagline: 'Dormez sur vos deux oreilles.',
         description: 'Désinfection totale anti-acariens, élimination des traces de transpiration et d\'urine pour une hygiène parfaite.',
         longDescription: 'Nous passons un tiers de notre vie sur notre matelas. Notre nettoyage en profondeur élimine les acariens, les bactéries, les moisissures invisibles et les allergènes. Idéal pour les personnes allergiques ou pour simplement retrouver une literie saine et fraîche. Produits écologiques et non toxiques.',
-        price: 40,
+        price: 70,
         priceList: [
-            { label: 'Matelas Enfant', price: 40 },
-            { label: 'Matelas 1 place', price: 50 },
-            { label: 'Matelas 2 places', price: 60 }
+            { label: '1 personne', price: 70 },
+            { label: '2 personnes', price: 85 }
         ],
         category: 'Textile',
-        imageUrl: '/Photo/matelas.webp',
+        imageUrl: '/Photo/mattress.png',
         gallery: [
-            '/Photo/matelas.webp',
+            '/Photo/mattress.png',
             '/Photo/Tache.png'
         ],
         features: ['Anti-acariens', 'Élimination auréoles', 'Hypoallergénique']
     },
     {
         id: 's3',
-        name: 'Lavage Auto (Intérieur)',
-        tagline: 'Comme au premier jour.',
-        description: 'Lavage intérieur complet à domicile. Shampoing des sièges, nettoyage des plastiques et vitres.',
-        longDescription: 'Nous intervenons sur votre lieu de travail ou à domicile pour un nettoyage intérieur méticuleux. De la citadine à l\'utilitaire, nous traitons les plastiques, aspirons en profondeur et rénovons vos sièges (tissu ou cuir) par injection-extraction ou vapeur.',
-        price: 50,
+        name: 'Prestations Automobile',
+        tagline: 'Idéal pour redonner de l\'éclat à votre véhicule ou préparer une vente.',
+        description: 'Lavage intérieur et extérieur complet à domicile. Prélavage, aspiration, shampoing des sièges.',
+        longDescription: 'Nous intervenons sur votre lieu de travail ou à domicile pour un nettoyage méticuleux. De la citadine à l\'utilitaire, nous traitons les plastiques, aspirons en profondeur et rénovons vos sièges.',
+        price: 120,
         priceList: [
-            { label: 'Formule Éco (Aspiration + Plastiques)', price: 50 },
-            { label: 'Formule Premium (Shampoing sièges inclus)', price: 70 }
+            { label: 'Intérieur & Extérieur (L\'essentiel)', price: 120 },
+            { label: 'Remise à neuf Intérieure (Coup de frais)', price: 150 },
+            { label: 'Remise à neuf Complète (Le prestige)', price: 180 }
         ],
         category: 'Auto',
-        imageUrl: '/Photo/Voiture.webp',
+        imageUrl: '/Photo/car_interior.png',
         gallery: [
-            '/Photo/Voiture.webp',
+            '/Photo/car_interior.png',
             '/Photo/shampouineuse%20vs%20nettoyeur%20vapeur.jpg'
         ],
-        features: ['Shampoing sièges', 'Nettoyage plastiques', 'Sans eau', 'Désinfection habitacle']
+        features: ['Prélavage mousse', 'Soin des cuirs', 'Cire de protection', 'Désinfection habitacle']
     },
     {
         id: 's4',
         name: 'Nettoyage Tapis',
         tagline: 'Ravivez les couleurs.',
         description: 'Décrassage en profondeur des fibres, qu\'elles soient synthétiques, laine ou tapis d\'Orient.',
-        longDescription: 'Les tapis sont de véritables nids à poussière et allergènes. Notre matériel haut de gamme permet d\'extraire la saleté incrustée au cœur des fibres sans les abîmer. Nous traitons les mauvaises odeurs (animaux, tabac) et redonnons de l\'éclat aux couleurs.',
+        longDescription: 'Les tapis sont de véritables nids à poussière et allergènes. Notre matériel haut de gamme permet d\'extraire la saleté incrustée au cœur des fibres sans les abîmer. Nous traitons les mauvers odeurs (animaux, tabac) et redonnons de l\'éclat aux couleurs.',
         price: 50,
         priceList: [
             { label: '1 Tapis', price: 50 },
@@ -82,12 +79,36 @@ export const PRODUCTS: Product[] = [
             { label: '3 Tapis', price: 100 }
         ],
         category: 'Textile',
-        imageUrl: '/Photo/Tapis.avif',
+        imageUrl: '/Photo/carpet.png',
         gallery: [
-            '/Photo/Tapis.avif',
+            '/Photo/carpet.png',
             '/Photo/matelas.webp'
         ],
         features: ['Fibres naturelles', 'Fibres synthétiques', 'Séchage contrôlé']
+    },
+    {
+        id: 's5',
+        name: 'Nettoyage de Bureau',
+        tagline: 'Des espaces de travail impeccables.',
+        description: 'Solutions sur mesure pour vos locaux professionnels.',
+        longDescription: 'Nettoyage hebdomadaire établi sur devis selon la surface. Un environnement sain favorise la productivité et reflète le professionnalisme de votre entreprise.',
+        price: 35,
+        priceLabel: '35 € / h',
+        category: 'Désinfection',
+        imageUrl: '/Photo/office.png',
+        features: ['Hebdomadaire', 'Sur mesure', 'Flexible']
+    },
+    {
+        id: 's6',
+        name: 'Nettoyage de Fin de Chantier',
+        tagline: 'Après travaux.',
+        description: 'Solutions sur mesure pour vos espaces après chantier.',
+        longDescription: 'Mise au propre approfondie après rénovation ou construction. Établi sur devis après visite, pour faire briller votre nouveau lieu de vie ou de travail.',
+        price: 0,
+        priceLabel: 'Sur devis (au m²)',
+        category: 'Désinfection',
+        imageUrl: '/Photo/post_construction.png',
+        features: ['Visite préalable', 'Nettoyage complet', 'Dépoussiérage']
     }
 ];
 

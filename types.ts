@@ -7,8 +7,9 @@
 import React from 'react';
 
 export interface PricingOption {
-    label: string;
-    price: number;
+  label: string;
+  price: number;
+  priceLabel?: string;
 }
 
 export interface Product {
@@ -18,6 +19,7 @@ export interface Product {
   description: string;
   longDescription?: string;
   price: number; // Starting price
+  priceLabel?: string; // Custom display text for price (e.g. "Sur devis")
   priceList?: PricingOption[]; // Detailed price list
   category: 'Textile' | 'Auto' | 'Désinfection';
   imageUrl: string;
@@ -45,7 +47,7 @@ export enum LoadingState {
   SUCCESS = 'SUCCESS'
 }
 
-export type ViewState = 
+export type ViewState =
   | { type: 'home' }
   | { type: 'product', product: Product }
   | { type: 'journal', article: JournalArticle }

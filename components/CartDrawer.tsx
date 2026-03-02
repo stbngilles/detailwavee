@@ -80,7 +80,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onRemov
                       )}
                     </div>
                     <span className="font-bold text-slate-900">
-                      {item.selectedOption ? item.selectedOption.price : item.price}€
+                      {item.selectedOption ? (item.selectedOption.priceLabel || `${item.selectedOption.price}€`) : (item.priceLabel || `${item.price}€`)}
                     </span>
                   </div>
                   <button

@@ -10,42 +10,42 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
   return (
     <div
       onClick={() => onClick(product)}
-      className="group cursor-pointer bg-white rounded-xl p-4 border border-slate-100 shadow-sm hover:shadow-xl hover:border-[#2563EB]/10 transition-all duration-500 flex flex-col h-full active:scale-[0.98] outline-none"
+      className="group cursor-pointer bg-white rounded-3xl p-5 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:border-blue-100 transition-all duration-500 flex flex-col h-full active:scale-[0.98] outline-none"
     >
-      <div className="relative aspect-[4/5] rounded-lg overflow-hidden mb-6 bg-slate-50">
+      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-8 bg-slate-50">
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
         />
-        <div className="absolute inset-0 bg-[#001A72]/0 group-hover:bg-[#001A72]/5 transition-colors duration-500"></div>
+        <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-500"></div>
 
         <div className="absolute top-4 left-4">
-          <span className="px-4 py-1.5 bg-white rounded-lg text-[10px] font-black uppercase tracking-widest text-[#001A72] border border-slate-100 shadow-sm">
+          <span className="px-5 py-2 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-[#001A72] border border-white/20 shadow-sm">
             {product.category}
           </span>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col px-2 pb-2">
-        <div className="flex justify-between items-start mb-3 gap-4">
-          <h3 className="text-xl font-black text-[#001A72] leading-tight tracking-tight group-hover:text-[#2563EB] transition-colors">{product.name}</h3>
-          <span className="text-lg font-black text-[#2563EB]">
-            {product.price}€
+      <div className="flex-1 flex flex-col px-3 pb-3">
+        <div className="flex flex-col mb-4 gap-2">
+          <h3 className="text-2xl font-black text-slate-900 leading-tight tracking-tight group-hover:text-blue-600 transition-colors">{product.name}</h3>
+          <span className="text-xl font-bold text-blue-600">
+            {product.priceLabel || `${product.price}€`}
           </span>
         </div>
 
-        <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium line-clamp-2">
+        <p className="text-slate-500 text-sm leading-relaxed mb-8 font-light line-clamp-2">
           {product.tagline || product.description}
         </p>
 
-        <div className="mt-auto flex items-center justify-between pt-5 border-t border-slate-50">
-          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#001A72]">
-            Découvrir
+        <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-50">
+          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 group-hover:text-blue-600 transition-colors">
+            En savoir plus
           </span>
-          <div className="w-10 h-10 rounded-lg bg-slate-50 text-[#001A72] flex items-center justify-center group-hover:bg-[#2563EB] group-hover:text-white transition-all shadow-inner">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-4 h-4">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          <div className="w-12 h-12 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-0.5 transition-transform">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </div>
         </div>
