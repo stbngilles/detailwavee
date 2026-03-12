@@ -106,10 +106,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onRemov
               <span>Sous-total</span>
               <span>{total}€</span>
             </div>
-            <div className="flex justify-between items-center text-slate-500 uppercase tracking-widest font-bold text-[10px]">
-              <span>Déplacement</span>
-              <span className="text-green-600">Offert</span>
-            </div>
+
             <div className="flex justify-between items-center pt-2">
               <span className="text-xl font-bold text-slate-900">Total estimé</span>
               <span className="text-3xl font-bold text-blue-600">{total}€</span>

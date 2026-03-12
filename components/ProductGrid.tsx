@@ -16,8 +16,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onProductClick }) => {
         <div className="flex flex-col items-center text-center mb-16 space-y-6">
           <span className="text-blue-600 font-bold uppercase tracking-widest text-sm">Nos Prestations</span>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Services de Nettoyage</h2>
-          <p className="max-w-2xl text-slate-600 text-lg">
-            Choisissez le service adapté à vos besoins. Prix transparents, déplacement inclus sur Liège.
+          <p className="text-slate-500 font-medium max-w-xl mx-auto">
+            Prix transparents, service premium sur Liège et environs.
           </p>
         </div>
 

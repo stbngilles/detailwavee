@@ -175,7 +175,7 @@ async function initProduct() {
                             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Prix total</span>
                             <p id="display-price" class="text-4xl font-bold text-slate-900">${esc(initialPrice)}</p>
                         </div>
-                        <span class="text-green-600 font-bold text-xs uppercase tracking-widest">Déplacement Offert</span>
+
                     </div>
                     <button onclick="addCurrentToCart()"
                         class="w-full py-5 bg-blue-600 text-white rounded-2xl uppercase tracking-[0.2em] text-sm font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3 active:scale-[0.98]">

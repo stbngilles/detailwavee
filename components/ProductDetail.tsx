@@ -140,9 +140,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
                     {selectedOption ? (selectedOption.priceLabel || `${selectedOption.price}€`) : (product.priceLabel || `${product.price}€`)}
                   </p>
                 </div>
-                <div className="text-right">
-                  <span className="text-green-600 font-bold text-xs uppercase tracking-widest">Déplacement Offert</span>
-                </div>
+
               </div>
 
               <button

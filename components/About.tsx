@@ -59,9 +59,6 @@ const About: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 pt-6 border-t border-white/10">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/50">Déplacement Offert sur toute la zone</p>
-            </div>
           </div>
         </div>
       </div>

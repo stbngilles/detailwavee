@@ -86,7 +86,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Minimal Standards Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-4 pt-8 border-t border-slate-100 w-full">
+        <div className="grid grid-cols-3 gap-4 md:gap-8 mt-4 pt-8 border-t border-slate-100 w-full">
           <div className="flex flex-col items-center gap-1">
             <span className="text-base md:text-2xl font-black text-[#001A72]">7j/7</span>
             <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Service continu</p>
@@ -98,10 +98,6 @@ const Hero: React.FC = () => {
           <div className="flex flex-col items-center gap-1">
             <span className="text-base md:text-2xl font-black text-[#001A72]">Liège</span>
             <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Zone Locale</p>
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-base md:text-2xl font-black text-[#2563EB]">Offert</span>
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Déplacement</p>
           </div>
         </div>
       </div>

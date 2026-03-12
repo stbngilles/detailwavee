@@ -126,9 +126,9 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
+    } catch (err: any) {
       console.error('Email send failed', err);
-      setError("Échec de l'envoi. Vérifiez la configuration ou réessayez.");
+      setError(err.message || "Échec de l'envoi. Vérifiez la configuration ou réessayez.");
     } finally {
       setSending(false);
     }
@@ -466,14 +466,6 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                     ))}
 
                     <div className="border-t border-slate-100 pt-6 space-y-3">
-                      <div className="flex justify-between text-sm text-slate-500">
-                        <span>Sous-total</span>
-                        <span className="text-slate-900 font-medium">{subtotal}€</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-500">Déplacement (Liège)</span>
-                        <span className="text-green-600 font-bold">OFFERT</span>
-                      </div>
                     </div>
 
                     <div className="bg-slate-50 p-4 rounded-xl flex justify-between items-center">

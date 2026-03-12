@@ -1,14 +1,21 @@
-
 import { BrevoClient } from '@getbrevo/brevo';
-
-const brevo = new BrevoClient({
-  apiKey: process.env.BREVO_API_KEY || ''
-});
 
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
     return response.status(405).json({ error: 'Method not allowed' });
   }
+
+  const apiKey = process.env.BREVO_API_KEY;
+  const senderEmail = process.env.BREVO_SENDER_EMAIL;
+
+  if (!apiKey) {
+    console.error('BREVO_API_KEY is missing');
+    return response.status(500).json({ error: 'Configuration manquante : BREVO_API_KEY est introuvable sur le serveur.' });
+  }
+
+  const brevo = new BrevoClient({
+    apiKey: apiKey
+  });
 
   try {
     const {
@@ -115,7 +122,7 @@ export default async function handler(request, response) {
     `;
 
     // 1. Send notification to OWNER
-    const ownerEmailParams = {
+    const ownerEmailParams: any = {
       subject: `Nouvelle demande de rendez-vous - ${firstName} ${lastName}`,
       htmlContent: htmlContent,
       sender: { name: "DetailWave", email: process.env.BREVO_SENDER_EMAIL || "detailwave01@gmail.com" },
@@ -155,8 +162,17 @@ export default async function handler(request, response) {
     }
 
     return response.status(200).json(ownerData);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sending email:', error);
-    return response.status(500).json({ error: error.message });
+    
+    // Extract more detail from Brevo error if available
+    let errorMessage = error.message;
+    if (error.response && error.response.body && error.response.body.message) {
+      errorMessage = `Brevo Error: ${error.response.body.message}`;
+    } else if (error.body && error.body.message) {
+      errorMessage = `Brevo Error: ${error.body.message}`;
+    }
+    
+    return response.status(500).json({ error: errorMessage });
   }
 }
