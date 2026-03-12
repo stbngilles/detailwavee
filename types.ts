@@ -15,6 +15,7 @@ export interface PricingOption {
 export interface Product {
   id: string;
   name: string;
+  slug: string;
   tagline: string;
   description: string;
   longDescription?: string;
@@ -24,6 +25,8 @@ export interface Product {
   category: 'Textile' | 'Auto' | 'Désinfection';
   imageUrl: string;
   gallery?: string[];
+  beforeImage?: string;
+  afterImage?: string;
   features: string[];
 }
 

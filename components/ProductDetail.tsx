@@ -39,34 +39,20 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
 
           {/* Left: Images */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="w-full aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-50 border border-slate-100 group relative">
-              <ReactCompareSlider
-                className="w-full h-full"
-                item1={
-                  <ReactCompareSliderImage
-                    src={product.gallery && product.gallery.length > 1 ? product.gallery[1] : '/Photo/Tache.png'}
-                    alt="Avant"
-                    className="object-cover"
-                  />
-                }
-                item2={
-                  <ReactCompareSliderImage
-                    src={product.imageUrl}
-                    alt="Après"
-                    className="object-cover"
-                  />
-                }
-              />
-              <div className="absolute top-6 left-6 pointer-events-none">
-                <span className="px-4 py-2 bg-slate-900/80 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-widest text-white border border-white/20 shadow-lg">
-                  Avant
-                </span>
-              </div>
-              <div className="absolute top-6 right-6 pointer-events-none">
-                <span className="px-4 py-2 bg-blue-600/90 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-widest text-white border border-white/20 shadow-lg">
-                  Après
-                </span>
-              </div>
+            <div className="w-full h-[500px] md:h-[700px] rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-50 border border-slate-100 group relative">
+              {product.beforeImage && product.afterImage ? (
+                <ReactCompareSlider
+                  className="w-full h-full"
+                  itemOne={<ReactCompareSliderImage src={product.beforeImage} alt="Avant" className="object-cover h-full" />}
+                  itemTwo={<ReactCompareSliderImage src={product.afterImage} alt="Après" className="object-cover h-full" />}
+                />
+              ) : (
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           </div>
 

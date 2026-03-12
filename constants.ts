@@ -10,6 +10,7 @@ export const PRODUCTS: Product[] = [
     {
         id: 's1',
         name: 'Nettoyage Canapé',
+        slug: 'canapé',
         tagline: 'Redonnez vie à votre salon.',
         description: 'Élimination des taches tenaces, neutralisation des odeurs et désinfection complète par injection-extraction.',
         longDescription: 'Notre service de nettoyage de canapé à domicile utilise des techniques professionnelles pour traiter la microfibre, le velours, le coton et le lin. Nous éliminons les taches de café, de graisse, d\'urine et neutralisons les mauvaises odeurs. Le résultat est visible immédiatement et le séchage est rapide.',
@@ -22,14 +23,17 @@ export const PRODUCTS: Product[] = [
         category: 'Textile',
         imageUrl: '/Photo/sofa.png',
         gallery: [
-            '/Photo/sofa.png',
-            '/Photo/Tache.png'
+            '/Photo/AvantApres/Avant_canape.jpg',
+            '/Photo/AvantApres/Apres_canape.jpg'
         ],
+        beforeImage: '/Photo/AvantApres/Avant_canape.jpg',
+        afterImage: '/Photo/AvantApres/Apres_canape.jpg',
         features: ['Détachage profond', 'Désinfection', 'Anti-odeurs', 'Séchage rapide']
     },
     {
         id: 's2',
         name: 'Nettoyage Matelas',
+        slug: 'matelas',
         tagline: 'Dormez sur vos deux oreilles.',
         description: 'Désinfection totale anti-acariens, élimination des traces de transpiration et d\'urine pour une hygiène parfaite.',
         longDescription: 'Nous passons un tiers de notre vie sur notre matelas. Notre nettoyage en profondeur élimine les acariens, les bactéries, les moisissures invisibles et les allergènes. Idéal pour les personnes allergiques ou pour simplement retrouver une literie saine et fraîche. Produits écologiques et non toxiques.',
@@ -41,14 +45,17 @@ export const PRODUCTS: Product[] = [
         category: 'Textile',
         imageUrl: '/Photo/mattress.png',
         gallery: [
-            '/Photo/mattress.png',
-            '/Photo/Tache.png'
+            '/Photo/AvantApres/matelas_avant.jpg',
+            '/Photo/AvantApres/matelas_après.jpg'
         ],
+        beforeImage: '/Photo/AvantApres/matelas_avant.jpg',
+        afterImage: '/Photo/AvantApres/matelas_après.jpg',
         features: ['Anti-acariens', 'Élimination auréoles', 'Hypoallergénique']
     },
     {
         id: 's3',
         name: 'Prestations Automobile',
+        slug: 'voiture',
         tagline: 'Idéal pour redonner de l\'éclat à votre véhicule ou préparer une vente.',
         description: 'Lavage intérieur et extérieur complet à domicile. Prélavage, aspiration, shampoing des sièges.',
         longDescription: 'Nous intervenons sur votre lieu de travail ou à domicile pour un nettoyage méticuleux. De la citadine à l\'utilitaire, nous traitons les plastiques, aspirons en profondeur et rénovons vos sièges.',
@@ -61,14 +68,17 @@ export const PRODUCTS: Product[] = [
         category: 'Auto',
         imageUrl: '/Photo/car_interior.png',
         gallery: [
-            '/Photo/car_interior.png',
-            '/Photo/shampouineuse%20vs%20nettoyeur%20vapeur.jpg'
+            '/Photo/AvantApres/Avant_voiture.jpg',
+            '/Photo/AvantApres/Apres_voiture.jpg'
         ],
+        beforeImage: '/Photo/AvantApres/Avant_voiture.jpg',
+        afterImage: '/Photo/AvantApres/Apres_voiture.jpg',
         features: ['Prélavage mousse', 'Soin des cuirs', 'Cire de protection', 'Désinfection habitacle']
     },
     {
         id: 's4',
         name: 'Nettoyage Tapis',
+        slug: 'tapis',
         tagline: 'Ravivez les couleurs.',
         description: 'Décrassage en profondeur des fibres, qu\'elles soient synthétiques, laine ou tapis d\'Orient.',
         longDescription: 'Les tapis sont de véritables nids à poussière et allergènes. Notre matériel haut de gamme permet d\'extraire la saleté incrustée au cœur des fibres sans les abîmer. Nous traitons les mauvers odeurs (animaux, tabac) et redonnons de l\'éclat aux couleurs.',
@@ -81,14 +91,17 @@ export const PRODUCTS: Product[] = [
         category: 'Textile',
         imageUrl: '/Photo/carpet.png',
         gallery: [
-            '/Photo/carpet.png',
-            '/Photo/matelas.webp'
+            '/Photo/AvantApres/tapis_avant.jpg',
+            '/Photo/AvantApres/tapis_après.jpg'
         ],
+        beforeImage: '/Photo/AvantApres/tapis_avant.jpg',
+        afterImage: '/Photo/AvantApres/tapis_après.jpg',
         features: ['Fibres naturelles', 'Fibres synthétiques', 'Séchage contrôlé']
     },
     {
         id: 's5',
         name: 'Nettoyage de Bureau',
+        slug: 'bureau',
         tagline: 'Des espaces de travail impeccables.',
         description: 'Solutions sur mesure pour vos locaux professionnels.',
         longDescription: 'Nettoyage hebdomadaire établi sur devis selon la surface. Un environnement sain favorise la productivité et reflète le professionnalisme de votre entreprise.',
@@ -96,11 +109,18 @@ export const PRODUCTS: Product[] = [
         priceLabel: '35 € / h',
         category: 'Désinfection',
         imageUrl: '/Photo/office.png',
+        gallery: [
+            '/Photo/AvantApres/bureau_avant.jpg',
+            '/Photo/AvantApres/bureau_apres.jpg'
+        ],
+        beforeImage: '/Photo/AvantApres/bureau_avant.jpg',
+        afterImage: '/Photo/AvantApres/bureau_apres.jpg',
         features: ['Hebdomadaire', 'Sur mesure', 'Flexible']
     },
     {
         id: 's6',
         name: 'Nettoyage de Fin de Chantier',
+        slug: 'fin-de-chantier',
         tagline: 'Après travaux.',
         description: 'Solutions sur mesure pour vos espaces après chantier.',
         longDescription: 'Mise au propre approfondie après rénovation ou construction. Établi sur devis après visite, pour faire briller votre nouveau lieu de vie ou de travail.',
@@ -108,6 +128,12 @@ export const PRODUCTS: Product[] = [
         priceLabel: 'Sur devis (au m²)',
         category: 'Désinfection',
         imageUrl: '/Photo/post_construction.png',
+        gallery: [
+            '/Photo/AvantApres/avant_chantier.jpg',
+            '/Photo/AvantApres/apres_chantier.jpg'
+        ],
+        beforeImage: '/Photo/AvantApres/avant_chantier.jpg',
+        afterImage: '/Photo/AvantApres/apres_chantier.jpg',
         features: ['Visite préalable', 'Nettoyage complet', 'Dépoussiérage']
     }
 ];

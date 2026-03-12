@@ -5,7 +5,7 @@
 */
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
@@ -17,11 +17,35 @@ import JournalDetail from './components/JournalDetail';
 import CartDrawer from './components/CartDrawer';
 import Checkout from './components/Checkout';
 import { Product, CartItem, PricingOption, ViewState } from './types';
+import { PRODUCTS } from './constants';
 
 function App() {
   const [view, setView] = useState<ViewState>({ type: 'home' });
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = decodeURIComponent(window.location.pathname.substring(1));
+      if (!path || path === '') {
+         // If there's a hash, we might still want to be home
+         setView({ type: 'home' });
+      } else {
+         const product = PRODUCTS.find(p => p.slug === path);
+         if (product) {
+            setView({ type: 'product', product });
+         } else {
+            // Unknown path, fallback to home
+            setView({ type: 'home' });
+         }
+      }
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    handleLocationChange(); // Trigger on initial load
+
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
 
   // Handle navigation (clicks on Navbar or Footer links)
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -29,6 +53,7 @@ function App() {
 
     // If we are not home, go home first
     if (view.type !== 'home') {
+      window.history.pushState({}, '', '/');
       setView({ type: 'home' });
       // Allow state update to render Home before scrolling
       setTimeout(() => scrollToSection(targetId), 0);
@@ -95,6 +120,7 @@ function App() {
             <Hero />
             <ProductGrid onProductClick={(p) => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.history.pushState({}, '', '/' + p.slug);
               setView({ type: 'product', product: p });
             }} />
             <About />
@@ -109,6 +135,7 @@ function App() {
           <ProductDetail
             product={view.product}
             onBack={() => {
+              window.history.pushState({}, '', '/');
               setView({ type: 'home' });
               setTimeout(() => scrollToSection('products'), 50);
             }}
@@ -119,14 +146,20 @@ function App() {
         {view.type === 'journal' && (
           <JournalDetail
             article={view.article}
-            onBack={() => setView({ type: 'home' })}
+            onBack={() => {
+              window.history.pushState({}, '', '/');
+              setView({ type: 'home' });
+            }}
           />
         )}
 
         {view.type === 'checkout' && (
           <Checkout
             items={cartItems}
-            onBack={() => setView({ type: 'home' })}
+            onBack={() => {
+              window.history.pushState({}, '', '/');
+              setView({ type: 'home' });
+            }}
           />
         )}
       </main>
@@ -141,6 +174,7 @@ function App() {
         onCheckout={() => {
           setIsCartOpen(false);
           window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.history.pushState({}, '', '/checkout');
           setView({ type: 'checkout' });
         }}
       />
