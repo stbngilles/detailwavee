@@ -1,7 +1,9 @@
 
-import { Resend } from 'resend';
+import { BrevoClient } from '@getbrevo/brevo';
 
-const resend = new Resend('re_HaZqQwM4_D6RyVkQdJBELiQTWuZLRu2vM');
+const brevo = new BrevoClient({
+  apiKey: process.env.BREVO_API_KEY || ''
+});
 
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
@@ -26,18 +28,17 @@ export default async function handler(request, response) {
     } = request.body;
 
     const attachments = (photos || []).map((photoDataUrl, index) => {
-      // Expecting data:image/png;base64,.....
       const matches = photoDataUrl.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
       if (!matches || matches.length !== 3) {
         return null;
       }
       const type = matches[1];
-      const buffer = Buffer.from(matches[2], 'base64');
+      const base64Content = matches[2];
       const extension = type.split('/')[1] || 'jpg';
 
       return {
-        filename: `photo-${index + 1}.${extension}`,
-        content: buffer,
+        name: `photo-${index + 1}.${extension}`,
+        content: base64Content,
       };
     }).filter(Boolean);
 
@@ -63,33 +64,23 @@ export default async function handler(request, response) {
       </head>
       <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px 20px;">
         <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-          
-          <!-- Header -->
           <div style="background-color: #1e3a8a; padding: 32px 20px; text-align: center;">
             <h1 style="color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 2px;">DETAILWAVE</h1>
             <p style="color: #bfdbfe; margin: 8px 0 0; font-size: 14px;">Nouvelle demande de rendez-vous</p>
           </div>
-
-          <!-- Content -->
           <div style="padding: 32px;">
-            
-            <!-- Customer Info -->
             <div style="margin-bottom: 32px;">
               <h2 style="font-size: 18px; font-weight: bold; color: #111827; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">👤 Client</h2>
               <p style="margin: 8px 0; color: #4b5563;"><strong>${firstName} ${lastName}</strong></p>
               <p style="margin: 8px 0; color: #4b5563;">📞 <a href="tel:${phone}" style="color: #2563EB; text-decoration: none;">${phone}</a></p>
               <p style="margin: 8px 0; color: #4b5563;">✉️ <a href="mailto:${email}" style="color: #2563EB; text-decoration: none;">${email || 'Non renseigné'}</a></p>
             </div>
-
-            <!-- Address -->
             <div style="margin-bottom: 32px;">
               <h2 style="font-size: 18px; font-weight: bold; color: #111827; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">📍 Adresse</h2>
               <p style="margin: 8px 0; color: #4b5563;">${address}</p>
               <p style="margin: 8px 0; color: #4b5563;">${postalCode} ${city}</p>
               ${note ? `<div style="background-color: #fffbeb; padding: 12px; border-radius: 8px; margin-top: 12px; color: #92400e; font-size: 14px; border: 1px solid #fcd34d;">📝 <strong>Note:</strong> ${note}</div>` : ''}
             </div>
-
-            <!-- Appointment -->
             <div style="margin-bottom: 32px;">
               <h2 style="font-size: 18px; font-weight: bold; color: #111827; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">📅 Rendez-vous souhaité</h2>
               <div style="display: flex; gap: 20px;">
@@ -103,8 +94,6 @@ export default async function handler(request, response) {
                 </div>
               </div>
             </div>
-
-            <!-- Order Items -->
             <div style="margin-bottom: 32px;">
               <h2 style="font-size: 18px; font-weight: bold; color: #111827; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">🛒 Panier</h2>
               ${itemsHtml}
@@ -113,10 +102,7 @@ export default async function handler(request, response) {
                 <p style="margin: 0; font-size: 28px; font-weight: bold; color: #2563EB;">${total}</p>
               </div>
             </div>
-
           </div>
-
-          <!-- Footer -->
           <div style="background-color: #f9fafb; padding: 24px; text-align: center; border-top: 1px solid #e5e7eb;">
             <p style="margin: 0; font-size: 12px; color: #9ca3af;">Cet e-mail a été généré automatiquement par le site DetailWave.</p>
             <p style="margin: 8px 0 0; font-size: 12px; color: #9ca3af;">
@@ -128,16 +114,47 @@ export default async function handler(request, response) {
       </html>
     `;
 
-    const data = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'pixelbrute.studio@gmail.com',
-      replyTo: email, // Reply to the customer
+    // 1. Send notification to OWNER
+    const ownerEmailParams = {
       subject: `Nouvelle demande de rendez-vous - ${firstName} ${lastName}`,
-      html: htmlContent,
-      attachments: attachments
-    });
+      htmlContent: htmlContent,
+      sender: { name: "DetailWave", email: process.env.BREVO_SENDER_EMAIL || "detailwave01@gmail.com" },
+      to: [{ email: process.env.BREVO_RECIPIENT_EMAIL || "detailwave01@gmail.com" }],
+      replyTo: { email: email || process.env.BREVO_RECIPIENT_EMAIL || "detailwave01@gmail.com" }
+    };
 
-    return response.status(200).json(data);
+    if (attachments.length > 0) {
+      ownerEmailParams.attachment = attachments;
+    }
+
+    const ownerData = await brevo.transactionalEmails.sendTransacEmail(ownerEmailParams);
+
+    // 2. Send confirmation to CUSTOMER
+    if (email) {
+      const customerEmailParams = {
+        subject: "Confirmation de votre demande de rendez-vous - DetailWave",
+        htmlContent: `
+          <div style="font-family: sans-serif; color: #374151; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px;">
+            <h2 style="color: #1f2937;">Bonjour ${firstName},</h2>
+            <p>Nous avons bien reçu votre demande de rendez-vous et nous vous en remercions !</p>
+            <p>Nous allons l'analyser et nous reviendrons vers vous très prochainement.</p>
+            
+            <div style="background-color: #f9fafb; padding: 15px; border-radius: 6px; margin: 20px 0;">
+              <h3 style="margin-top: 0; font-size: 16px;">Résumé de votre demande :</h3>
+              <p style="margin: 5px 0;"><strong>Date souhaitée :</strong> ${preferredDate}</p>
+              <p style="margin: 5px 0;"><strong>Heure souhaitée :</strong> ${preferredTime}</p>
+            </div>
+
+            <p>À très bientôt,<br>L'équipe DetailWave</p>
+          </div>
+        `,
+        sender: { name: "DetailWave", email: process.env.BREVO_SENDER_EMAIL || "detailwave01@gmail.com" },
+        to: [{ email: email }],
+      };
+      await brevo.transactionalEmails.sendTransacEmail(customerEmailParams);
+    }
+
+    return response.status(200).json(ownerData);
   } catch (error) {
     console.error('Error sending email:', error);
     return response.status(500).json({ error: error.message });
