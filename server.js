@@ -1,7 +1,6 @@
-
 import express from 'express';
 import cors from 'cors';
-import { Resend } from 'resend';
+import { BrevoClient } from '@getbrevo/brevo';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -11,8 +10,10 @@ dotenv.config({ path: '.env.local' });
 const app = express();
 const port = 3001;
 
-// Initialize Resend with the key
-const resend = new Resend(process.env.RESEND_API_KEY || 're_HaZqQwM4_D6RyVkQdJBELiQTWuZLRu2vM');
+// Initialize Brevo
+const brevo = new BrevoClient({
+  apiKey: process.env.BREVO_API_KEY || ''
+});
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
@@ -37,18 +38,18 @@ app.post('/api/send-email', async (req, res) => {
 
     console.log(`Received order from ${firstName} ${lastName}`);
 
-    // Process attachments
+    // Process attachments for Brevo
     const attachments = (photos || []).map((photoDataUrl, index) => {
       const matches = photoDataUrl.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
       if (!matches || matches.length !== 3) return null;
 
       const type = matches[1];
-      const buffer = Buffer.from(matches[2], 'base64');
+      const base64Content = matches[2];
       const extension = type.split('/')[1] || 'jpg';
 
       return {
-        filename: `photo-${index + 1}.${extension}`,
-        content: buffer,
+        name: `photo-${index + 1}.${extension}`,
+        content: base64Content,
       };
     }).filter(Boolean);
 
@@ -137,17 +138,50 @@ app.post('/api/send-email', async (req, res) => {
       </html>
     `;
 
-    const data = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'pixelbrute.studio@gmail.com',
-      replyTo: email,
+    // 1. Envoyer le mail de notification au PROPRIÉTAIRE
+    const ownerEmailParams = {
       subject: `Nouvelle demande de rendez-vous - ${firstName} ${lastName}`,
-      html: htmlContent,
-      attachments: attachments
-    });
+      htmlContent: htmlContent,
+      sender: { name: "DetailWave", email: process.env.BREVO_SENDER_EMAIL || "detailwave01@gmail.com" },
+      to: [{ email: process.env.BREVO_RECIPIENT_EMAIL || "detailwave01@gmail.com" }],
+      replyTo: { email: email || process.env.BREVO_RECIPIENT_EMAIL || "detailwave01@gmail.com" }
+    };
 
-    console.log('Email sent successfully:', data);
-    res.status(200).json(data);
+    if (attachments.length > 0) {
+      ownerEmailParams.attachment = attachments;
+    }
+
+    const ownerData = await brevo.transactionalEmails.sendTransacEmail(ownerEmailParams);
+    console.log('Notification mail sent to owner:', ownerData.messageId);
+
+    // 2. Envoyer le mail de confirmation au CLIENT (Visiteur)
+    if (email) {
+      const customerEmailParams = {
+        subject: "Confirmation de votre demande de rendez-vous - DetailWave",
+        htmlContent: `
+          <div style="font-family: sans-serif; color: #374151; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px;">
+            <h2 style="color: #1f2937;">Bonjour ${firstName},</h2>
+            <p>Nous avons bien reçu votre demande de rendez-vous et nous vous en remercions !</p>
+            <p>Nous allons l'analyser et nous reviendrons vers vous très prochainement.</p>
+            
+            <div style="background-color: #f9fafb; padding: 15px; border-radius: 6px; margin: 20px 0;">
+              <h3 style="margin-top: 0; font-size: 16px;">Résumé de votre demande :</h3>
+              <p style="margin: 5px 0;"><strong>Date souhaitée :</strong> ${preferredDate}</p>
+              <p style="margin: 5px 0;"><strong>Heure souhaitée :</strong> ${preferredTime}</p>
+            </div>
+
+            <p>À très bientôt,<br>L'équipe DetailWave</p>
+          </div>
+        `,
+        sender: { name: "DetailWave", email: process.env.BREVO_SENDER_EMAIL || "detailwave01@gmail.com" },
+        to: [{ email: email }],
+      };
+
+      const customerData = await brevo.transactionalEmails.sendTransacEmail(customerEmailParams);
+      console.log('Confirmation mail sent to customer:', customerData.messageId);
+    }
+
+    res.status(200).json({ success: true, ownerMessageId: ownerData.messageId });
   } catch (error) {
     console.error('Error sending email:', error);
     res.status(500).json({ error: error.message });
