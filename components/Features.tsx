@@ -15,6 +15,7 @@ const Features: React.FC = () => {
            <img 
              src="/Photo/Tapis.avif" 
              alt="Natural Stone Texture" 
+             loading="lazy"
              className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-[1.5s]"
            />
         </div>
@@ -45,6 +46,7 @@ const Features: React.FC = () => {
            <img 
              src="/Photo/Voiture.webp" 
              alt="Woman sitting on wooden floor reading" 
+             loading="lazy"
              className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-[1.5s] brightness-90"
            />
         </div>

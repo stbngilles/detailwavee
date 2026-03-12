@@ -77,7 +77,7 @@ const Journal: React.FC<JournalProps> = ({ onArticleClick }) => {
                   <div className="flex justify-center lg:justify-start">
                     <StarRating />
                   </div>
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Basé sur nos derniers avis</p>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Basé sur nos derniers avis</p>
                 </div>
 
                 <a
@@ -100,7 +100,7 @@ const Journal: React.FC<JournalProps> = ({ onArticleClick }) => {
                     <div className="flex justify-between items-start mb-4">
                       <div>
                         <div className="font-black text-[#001A72] text-sm">{review.author}</div>
-                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{review.date}</div>
+                        <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{review.date}</div>
                       </div>
                       <StarRating />
                     </div>
@@ -125,6 +125,7 @@ const Journal: React.FC<JournalProps> = ({ onArticleClick }) => {
                 <img
                   src={article.image}
                   alt={article.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-[#001A72]/5 group-hover:bg-transparent transition-colors"></div>
@@ -132,7 +133,7 @@ const Journal: React.FC<JournalProps> = ({ onArticleClick }) => {
               <div className="flex flex-col flex-1 p-10 md:p-12">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="w-1.5 h-1.5 bg-[#2563EB] rounded-full"></span>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{article.date}</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{article.date}</span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-black text-[#001A72] mb-6 leading-tight group-hover:text-[#2563EB] transition-colors">{article.title}</h3>
                 <p className="text-slate-500 font-medium leading-relaxed line-clamp-3 mb-8">{article.excerpt}</p>

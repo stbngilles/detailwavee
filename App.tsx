@@ -47,6 +47,33 @@ function App() {
     return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
 
+  // Update SEO Title and Description based on current view
+  useEffect(() => {
+    let title = 'DETAILWAVE | Nettoyage de textiles et véhicules à domicile à Liège';
+    let description = 'Experts en nettoyage par injection-extraction à Liège. Redonnez vie à vos canapés, matelas, tapis et intérieurs de voiture.';
+
+    if (view.type === 'product' && view.product) {
+      title = `Nettoyage ${view.product.name} à domicile Liège | DETAILWAVE`;
+      description = view.product.description || description;
+    } else if (view.type === 'journal' && view.article) {
+      title = `${view.article.title} | DETAILWAVE`;
+      description = view.article.excerpt || description;
+    } else if (view.type === 'checkout') {
+      title = 'Panier | DETAILWAVE';
+    }
+
+    document.title = title;
+    
+    // Update meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', description);
+  }, [view]);
+
   // Handle navigation (clicks on Navbar or Footer links)
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();

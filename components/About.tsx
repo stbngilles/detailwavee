@@ -76,6 +76,7 @@ const About: React.FC = () => {
             <img
               src="/Photo/shampouineuse%20vs%20nettoyeur%20vapeur.jpg"
               alt="Cleaning Process"
+              loading="lazy"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-[#001A72]/10 group-hover:bg-transparent transition-colors"></div>
@@ -94,7 +95,7 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
           <div className="bg-[#001A72] rounded-2xl p-10 lg:p-16 flex flex-col justify-center text-white relative overflow-hidden shadow-2xl text-center md:text-left">
             <div className="absolute top-0 left-0 w-64 h-64 bg-[#2563EB]/5 blur-[100px] rounded-full -translate-y-1/2 -translate-x-1/2"></div>
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#2563EB] mb-4 relative">Engagement</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-300 mb-4 relative">Engagement</span>
             <h3 className="text-3xl md:text-5xl font-black mb-6 text-white leading-[1.1] relative">
               Sain pour vous,<br className="hidden md:block" /> et la planète.
             </h3>
@@ -106,6 +107,7 @@ const About: React.FC = () => {
             <img
               src="/Photo/ExpertCleaning.jpg"
               alt="Expertise Nettoyage"
+              loading="lazy"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
             />
           </div>

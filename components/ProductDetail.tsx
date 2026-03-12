@@ -19,6 +19,32 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
     }
   }, [product]);
 
+  // SEO: Update page title and meta description when product details are viewed
+  useEffect(() => {
+    const originalTitle = document.title;
+    const metaDescriptionTag = document.querySelector('meta[name="description"]');
+    const originalMetaDescription = metaDescriptionTag ? metaDescriptionTag.getAttribute('content') : '';
+
+    // Update title
+    document.title = `${product.name} | DETAILWAVE`;
+
+    // Update meta description
+    const seoDescription = product.longDescription 
+      ? product.longDescription.substring(0, 150) + '...' 
+      : product.description;
+      
+    if (metaDescriptionTag) {
+      metaDescriptionTag.setAttribute('content', seoDescription);
+    }
+
+    return () => {
+      document.title = originalTitle;
+      if (metaDescriptionTag && originalMetaDescription !== null) {
+        metaDescriptionTag.setAttribute('content', originalMetaDescription);
+      }
+    };
+  }, [product]);
+
   return (
     <div className="pt-32 min-h-screen bg-white animate-fade-in pb-24">
       <div className="max-w-7xl mx-auto px-6 md:px-12">

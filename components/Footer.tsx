@@ -24,7 +24,7 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
   };
 
   return (
-    <footer className="bg-slate-900 pt-24 pb-12 px-6 text-slate-400">
+    <footer className="bg-slate-900 pt-24 pb-12 px-6 text-slate-300">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
 
         <div className="md:col-span-4">
@@ -66,12 +66,12 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
           <div className="flex flex-col gap-4">
             <p className="text-sm">Besoin d'un devis urgent ?</p>
             <a href="tel:+32497363323" className="text-2xl font-bold text-white hover:text-blue-400 transition-colors">+32 497 36 33 23</a>
-            <p className="text-xs text-slate-500">Du Lundi au Dimanche, 8h - 20h</p>
+            <p className="text-xs text-slate-400">Du Lundi au Dimanche, 8h - 20h</p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest opacity-60">
+      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest text-slate-400">
         <p>© 2025 DETAILWAVE Liège. Tous droits réservés.</p>
       </div>
     </footer>

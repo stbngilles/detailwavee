@@ -32,11 +32,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onRemov
         <div className="flex items-center justify-between p-8 border-b border-slate-50">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Mon Panier</h2>
-            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">{items.length} services sélectionnés</p>
+            <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">{items.length} services sélectionnés</p>
           </div>
           <button
+            aria-label="Fermer le panier"
             onClick={onClose}
-            className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all hover:rotate-90"
+            className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-all hover:rotate-90"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -55,7 +56,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onRemov
               </div>
               <div className="space-y-2">
                 <p className="font-bold text-slate-900">Votre panier est vide</p>
-                <p className="text-sm text-slate-400">Découvrez nos services pour commencer.</p>
+                <p className="text-sm text-slate-500">Découvrez nos services pour commencer.</p>
               </div>
               <button onClick={onClose} className="text-blue-600 font-bold text-sm uppercase tracking-widest border-b-2 border-blue-100 pb-1">Continuer la visite</button>
             </div>
@@ -74,7 +75,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onRemov
                           {item.selectedOption.label}
                         </span>
                       ) : (
-                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
                           {item.category}
                         </span>
                       )}
@@ -85,7 +86,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onRemov
                   </div>
                   <button
                     onClick={() => onRemoveItem(idx)}
-                    className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-slate-300 hover:text-red-500 transition-colors mt-auto"
+                    className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-slate-400 hover:text-red-500 transition-colors mt-auto"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -125,7 +126,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onRemov
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </button>
-          <p className="text-[10px] text-slate-400 text-center font-medium leading-relaxed">
+          <p className="text-[10px] text-slate-500 text-center font-medium leading-relaxed">
             Estimation gratuite et sans engagement. <br />
             Le règlement s'effectue après la réalisation de la prestation.
           </p>

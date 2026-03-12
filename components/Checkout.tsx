@@ -169,7 +169,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
       <div className="max-w-6xl mx-auto">
         <button
           onClick={onBack}
-          className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-blue-600 transition-all mb-10"
+          className="group flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-blue-600 transition-all mb-10"
         >
           <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-blue-200 group-hover:bg-blue-50 transition-all">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform">
@@ -197,7 +197,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Prénom</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Prénom</label>
                       <input
                         type="text"
                         placeholder="Jean"
@@ -208,7 +208,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Nom</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Nom</label>
                       <input
                         type="text"
                         placeholder="Dupont"
@@ -222,7 +222,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Téléphone</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Téléphone</label>
                       <input
                         type="tel"
                         placeholder="+32 4XX XX XX XX"
@@ -233,7 +233,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Email (Optionnel)</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Email (Optionnel)</label>
                       <input
                         type="email"
                         placeholder="jean@exemple.be"
@@ -253,7 +253,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
                   <div className="space-y-5">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Adresse complète</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Adresse complète</label>
                       <input
                         type="text"
                         placeholder="Rue de l'intervention, n°"
@@ -266,7 +266,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
                     <div className="grid grid-cols-2 gap-5">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Code Postal</label>
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Code Postal</label>
                         <input
                           type="text"
                           placeholder="4000"
@@ -277,7 +277,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Ville</label>
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Ville</label>
                         <input
                           type="text"
                           placeholder="Liège"
@@ -290,7 +290,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Détails (Optionnel)</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Détails (Optionnel)</label>
                       <textarea
                         placeholder="Étage, code porte, horaires préférés..."
                         className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 outline-none focus:border-blue-500 focus:bg-white transition-all min-h-[120px] resize-none"
@@ -310,7 +310,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Date idéale</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Date idéale</label>
                       <input
                         type="date"
                         className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 outline-none focus:border-blue-500 focus:bg-white transition-all"
@@ -320,7 +320,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Heure idéale</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Heure idéale</label>
                       <div className="flex gap-2">
                         <select
                           className="flex-1 bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 outline-none focus:border-blue-500 focus:bg-white transition-all appearance-none cursor-pointer"
@@ -371,6 +371,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                         <img src={photo.preview} alt={`Preview ${idx}`} className="w-full h-full object-cover" />
                         <button
                           type="button"
+                          aria-label="Supprimer la photo"
                           onClick={() => removePhoto(idx)}
                           className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white"
                         >
@@ -382,7 +383,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                     ))}
 
                     {photos.length < 8 && (
-                      <label className="aspect-square rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all text-slate-400 hover:text-blue-600">
+                      <label className="aspect-square rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all text-slate-500 hover:text-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
@@ -436,7 +437,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
                 {items.length === 0 ? (
                   <div className="text-center py-10 space-y-4">
-                    <p className="text-slate-400 italic">Votre panier est vide.</p>
+                    <p className="text-slate-500 italic">Votre panier est vide.</p>
                     <button onClick={onBack} className="text-blue-600 text-sm font-bold">Ajouter des services</button>
                   </div>
                 ) : (
@@ -453,7 +454,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                               {item.selectedOption.label}
                             </p>
                           ) : (
-                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1.5">{item.category}</p>
+                            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1.5">{item.category}</p>
                           )}
                         </div>
                         <div className="text-right">
