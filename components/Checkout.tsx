@@ -58,6 +58,16 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
       }
 
       const filesToAdd = selectedFiles.slice(0, remainingSlots);
+      
+      // Calculate total size including existing photos
+      const currentTotalSize = photos.reduce((sum: number, p: any) => sum + p.file.size, 0);
+      const newFilesSize = filesToAdd.reduce((sum: number, f: File) => sum + f.size, 0);
+      
+      if (currentTotalSize + newFilesSize > 4 * 1024 * 1024) { // 4MB limit
+        setError('Taille totale des photos trop grande (max 4MB). Merci de réduire le nombre ou la qualité des images.');
+        return;
+      }
+
       const newPhotos = filesToAdd.map((file: File) => ({
         file,
         preview: URL.createObjectURL(file)
@@ -369,7 +379,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                   </div>
 
                   <p className="text-sm text-slate-500 ml-12">
-                    Ajoutez jusqu'à 8 photos pour nous aider à mieux évaluer votre demande.
+                    Ajoutez jusqu'à 8 photos (max 4 Mo au total) pour nous aider à mieux évaluer votre demande.
                   </p>
 
                   <div className="ml-12 grid grid-cols-2 md:grid-cols-4 gap-4">
