@@ -120,13 +120,13 @@ const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
       });
 
       if (!response.ok) {
-        let errorMessage = 'Failed to send email';
+        const text = await response.text();
+        let errorMessage = `Erreur serveur (${response.status})`;
         try {
-          const errorData = await response.json();
+          const errorData = JSON.parse(text);
           errorMessage = errorData.error || errorMessage;
         } catch {
-          const text = await response.text();
-          errorMessage = text || `Erreur serveur (${response.status})`;
+          if (text) errorMessage = text;
         }
         throw new Error(errorMessage);
       }
